@@ -1,0 +1,68 @@
+{
+  "name": "soqlx-opener",
+  "description": "This command will open SoqlXplorer in the SalesforceDX scratch org specified.",
+  "version": "0.1.0",
+  "author": "John M. Daniel @ImJohnMDaniel",
+  "bugs": "https://github.com/ImJohnMDaniel/soqlx-opener/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.10",
+    "@oclif/config": "^1.12.8",
+    "@oclif/errors": "^1.2.2",
+    "@salesforce/command": "^1.2.0",
+    "@salesforce/core": "^1.2.2",
+    "sinon": "^7.2.4",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.21.2",
+    "@oclif/plugin-help": "^2.1.6",
+    "@oclif/test": "^1.2.4",
+    "@salesforce/dev-config": "^1.4.4",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.5",
+    "chai": "^4.2.0",
+    "globby": "^9.0.0",
+    "jsonwebtoken": "^8.5.0",
+    "mocha": "^6.0.1",
+    "nyc": "^13.3.0",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/lib",
+    "/messages",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/ImJohnMDaniel/soqlx-opener",
+  "keywords": [
+    "sfdx-plugin",
+    "soqlxplorer",
+    "salesforcedx"
+  ],
+  "license": "MIT",
+  "oclif": {
+    "commands": "./lib/commands",
+    "topics": {
+      "soqlx": {
+        "description": "Commands to work with SoqlXplorer."
+      }
+    },
+    "bin": "sfdx",
+    "devPlugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "ImJohnMDaniel/soqlx-opener",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
+    "posttest": "tslint -p test -t stylish",
+    "prepare": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
