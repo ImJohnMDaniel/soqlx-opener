@@ -1,7 +1,7 @@
 {
   "name": "soqlx-opener",
   "description": "This command will open SoqlXplorer in the SalesforceDX scratch org specified.",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "author": "John M. Daniel @ImJohnMDaniel",
   "bugs": "https://github.com/ImJohnMDaniel/soqlx-opener/issues",
   "dependencies": {
