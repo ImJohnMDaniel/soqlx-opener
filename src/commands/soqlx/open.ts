@@ -19,7 +19,7 @@ export default class Open extends SfdxCommand {
   ];
 
   protected static flagsConfig = {
-    debug: flags.boolean({char: 'd', description: messages.getMessage('debugFlagDescription')})
+    debug: flags.boolean({char: 'd', description: messages.getMessage('flagDebugDescription')})
   };
 
   // Comment this out if your command does not require an org username
@@ -34,34 +34,36 @@ export default class Open extends SfdxCommand {
   public async run(): Promise<AnyJson> {
 
     try {
-      if ( this.org.getConnection().isUsingAccessToken ) {
-        const instanceUrl = this.org.getConnection().instanceUrl.replace(/https/gi, 'soqlx');
-        const accessToken = this.org.getConnection().accessToken;
 
-        if ( this.flags.debug ) {
-          this.ux.log('Is connection using access token == true');
-          this.ux.log(`modified uri == ${instanceUrl}`);
-          this.ux.log(`Access token == ${accessToken}`);
-          this.ux.log(`complete uri == ${instanceUrl}sid/${accessToken}`);
-        }
+      this.org.refreshAuth();
 
-        // Split arguments to use spawn
-        const args = [];
-        args.push(`${instanceUrl}sid/${accessToken}`);
+      // if ( this.org.getConnection().isUsingAccessToken() ) {
+      const instanceUrl = this.org.getConnection().instanceUrl.replace(/https/gi, 'soqlx');
+      const accessToken = this.org.getConnection().accessToken;
+      const completeUri = `${instanceUrl}/sid/${accessToken}`;
 
-        this.ux.log(`Opening SoqlXplorer for scrqtch org ${this.org.getOrgId()} using username ${this.org.getUsername()}`);
-
-        await spawn('open', args, { stdio: 'inherit'});
-
-        // Return an object to be displayed with --json
-        return { instanceUrl, accessToken };
-      } else {
-        throw new core.SfdxError( messages.getMessage('errorConnectionNotAccessingTokenBased'));
-      }
-    } catch (error) {
       if ( this.flags.debug ) {
-        this.ux.log('Is connection using access token == false');
+        this.ux.log(`Modified uri == ${instanceUrl}`);
+        this.ux.log(`Access token == ${accessToken}`);
+        this.ux.log(`Complete uri == ${completeUri}`);
       }
+
+      // Split arguments to use spawn
+      const args = [];
+      args.push(`${completeUri}`);
+
+      // this.ux.log(`Opening SoqlXplorer for scrqtch org ${this.org.getOrgId()} using username ${this.org.getUsername()}`);
+      this.ux.log(messages.getMessage('messageOpeningSoqlxForOrg').replace('{0}', this.org.getOrgId()).replace('{1}', this.org.getUsername()));
+
+      await spawn('open', args, { stdio: 'inherit'});
+
+      // Return an object to be displayed with --json
+      return { instanceUrl, accessToken };
+
+    } catch (error) {
+
+      throw new core.SfdxError( messages.getMessage('errorGeneral'), error);
+
     }
   }
 }

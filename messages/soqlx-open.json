@@ -1,5 +1,7 @@
 {
     "commandDescription": "Command will open SoqlXplorer in the SalesforceDX scratch org specified",
+    "messageOpeningSoqlxForOrg": "Opening SoqlXplorer for org {0} using username {1}",
     "errorConnectionNotAccessingTokenBased": "The CLI authentication for the org specified is access token based.  SoqlXplorer cannot be connected in this manner.  Try using the standard username/password approach instead.",
-    "debugFlagDescription": "Debug flag to display more information about connection"
+    "errorGeneral": "The following error occured.  If it occurs again, please report it.",
+    "flagDebugDescription": "Debug flag to display more information about connection"
 }
