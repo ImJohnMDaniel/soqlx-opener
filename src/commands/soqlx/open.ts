@@ -35,7 +35,7 @@ export default class Open extends SfdxCommand {
 
     try {
 
-      this.org.refreshAuth();
+      await this.org.refreshAuth();
 
       // if ( this.org.getConnection().isUsingAccessToken() ) {
       const instanceUrl = this.org.getConnection().instanceUrl.replace(/https/gi, 'soqlx');
