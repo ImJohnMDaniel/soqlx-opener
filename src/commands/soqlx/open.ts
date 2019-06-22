@@ -40,7 +40,12 @@ export default class Open extends SfdxCommand {
       // if ( this.org.getConnection().isUsingAccessToken() ) {
       const instanceUrl = this.org.getConnection().instanceUrl.replace(/https/gi, 'soqlx');
       const accessToken = this.org.getConnection().accessToken;
-      const completeUri = `${instanceUrl}sid/${accessToken}`;
+
+      let completeUri = `${instanceUrl}`;
+      if ( ! instanceUrl.endsWith('/')) {
+        completeUri += '/';
+      }
+      completeUri += `sid/${accessToken}`;
 
       if ( this.flags.debug ) {
         this.ux.log(`Modified uri == ${instanceUrl}`);
