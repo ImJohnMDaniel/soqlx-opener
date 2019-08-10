@@ -18,7 +18,7 @@ $ npm install -g soqlx-opener
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-soqlx-opener/0.1.11 darwin-x64 node-v11.10.1
+soqlx-opener/0.1.12 darwin-x64 node-v11.10.1
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -59,5 +59,5 @@ EXAMPLE
   $ sfdx soqlx:open --targetusername myOrg@example.com --targetdevhubusername devhub@org.com
 ```
 
-_See code: [src/commands/soqlx/open.ts](https://github.com/ImJohnMDaniel/soqlx-opener/blob/v0.1.11/src/commands/soqlx/open.ts)_
+_See code: [src/commands/soqlx/open.ts](https://github.com/ImJohnMDaniel/soqlx-opener/blob/v0.1.12/src/commands/soqlx/open.ts)_
 <!-- commandsstop -->
